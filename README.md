@@ -1,5 +1,6 @@
 # Multi-task-Learning
-The study and experiment of Multi-task Learning
+
+A PyTorch implementation of  [Multi-task learning using uncertainty to weigh losses for scene geometry and semantics](http://openaccess.thecvf.com/content_cvpr_2018/html/Kendall_Multi-Task_Learning_Using_CVPR_2018_paper.html)
 
 ## Example 1 : MTL for linear regression
 
@@ -25,9 +26,17 @@ Finally, σ₁,σ₂ converges to the correct values
 
 ## Example 2 : MTL for image classification
 
-[[Jupyter notebook]](https://github.com/KaffeeCat/Multi-task-Learning/blob/main/mtl_linear_regression.ipynb)
+[[Jupyter notebook]](https://github.com/KaffeeCat/Multi-task-Learning/blob/main/mtl_image_classification.ipynb)
 
 Dataset : MNIST
 Backbone : Conv2d → ReLU → Conv → ReLU → Maxpooling → Dropout → Flatten <br>
-Task 1 : FC(9216, 256) → ReLU → Dropout → FC(256, 10) <br>
-Task 2 : FC(9216,  32) → ReLU → Dropout → FC(32,  10) <br>
+Task head 1 : FC(9216, 256) → ReLU → Dropout → FC(256, 10) "It's easy to classification" <br>
+Task head 2 : FC(9216,  32) → ReLU → Dropout → FC(32,  10) "It's hard to classificatioh" <br>
+
+Training with Adam optimizer
+
+![](https://pic3.zhimg.com/80/v2-51ca068c268d1dfeb9c1aa738da40eeb_1440w.png)
+
+Finally, σ₁,σ₂ converges to the correct values
+
+![](https://pica.zhimg.com/80/v2-4b4a39af8a0c20ba0f1e36dd94f07d57_1440w.png)
