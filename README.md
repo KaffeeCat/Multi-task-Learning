@@ -3,48 +3,31 @@ The study and experiment of Multi-task Learning
 
 ## Example 1 : MTL for linear regression
 
-Random sampling on two linear equation with observation noise<br>
+[[知乎]](https://zhuanlan.zhihu.com/p/474528861)
+[[Jupyter notebook]](https://github.com/KaffeeCat/Multi-task-Learning/blob/main/mtl_linear_regression.ipynb)
+[[Paper]](https://openaccess.thecvf.com/content_cvpr_2018/html/Kendall_Multi-Task_Learning_Using_CVPR_2018_paper.html)
+
+Random sampling on two linear equation with observation noise σ₁=3, σ₂=0.5<br>
 
 y₁ = w₁ x + b₁ + σ₁<br>
 y₂ = w₂ x + b₂ + σ₂<br>
 
 ![](https://pic4.zhimg.com/80/v2-0172d99d00c73a9a63e0425162794b6c_1440w.png)
 
-Define MTL tasks
-```
-tasks = [
-        {
-            'name': "InputTask",
-            'layers': Sequential(*[nn.Linear(input_size, hidden_size), nn.ReLU()]),
-        },    
-        {
-            'name': "Linear1",
-            'layers': nn.Linear(hidden_size, output1_size),
-            'anchor_layer': "InputTask"
-        },    
-        {
-            'name': "Linear2",
-            'layers': nn.Linear(hidden_size, output2_size),
-            'anchor_layer': "InputTask"
-        },
-        {
-            'name': "MultiLoss",
-            'layers': MultiTaskLossWrapper(num_tasks=2),
-            'anchor_layer': ['Linear1', 'Linear2']
-        }
-    ]
 
-model = MTLModel(tasks, output_tasks=['MultiLoss'])
-```
-
-Training with Adam optimizer, loss, σ₁,σ₂ fluctuates during training
+Training with Adam optimizer
 
 ![](https://pica.zhimg.com/80/v2-d5af1c8dd44990334d520d24e1a60411_1440w.png)
 
+Finally, σ₁,σ₂ converges to the correct values
+
 ![](https://pic1.zhimg.com/80/v2-c33d496b8f63f33c7325a2288e7fe0ed_1440w.png)
 
+## Example 2 : MTL for image classification
 
+[[Jupyter notebook]](https://github.com/KaffeeCat/Multi-task-Learning/blob/main/mtl_linear_regression.ipynb)
 
-Jupyter notebook : [mtl_linear_regression.ipynb](https://github.com/KaffeeCat/Multi-task-Learning/blob/main/mtl_linear_regression.ipynb)
-
-Paper : [Multi-Task Learning Using Uncertainty to Weigh Losses for Scene Geometry and Semantics](https://openaccess.thecvf.com/content_cvpr_2018/html/Kendall_Multi-Task_Learning_Using_CVPR_2018_paper.html)
+Dataset : MNIST
+Backbone : Conv2d → ReLU → Conv → ReLU → Maxpooling → Dropout → Flatten <br>
+Task 1 : FC(9216, 256) → ReLU → Dropout → FC(256, 10) <br>
+Task 2 : FC(9216,  32) → ReLU → Dropout → FC(32,  10) <br>
