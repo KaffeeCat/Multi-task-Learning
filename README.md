@@ -1,6 +1,8 @@
 # Multi-task-Learning
 
-A PyTorch implementation of  [Multi-task learning using uncertainty to weigh losses for scene geometry and semantics](http://openaccess.thecvf.com/content_cvpr_2018/html/Kendall_Multi-Task_Learning_Using_CVPR_2018_paper.html)
+A PyTorch implementation of  [Multi-task learning using uncertainty to weigh losses for scene geometry and semantics](http://openaccess.thecvf.com/content_cvpr_2018/html/Kendall_Multi-Task_Learning_Using_CVPR_2018_paper.html) with [torchMTL](https://github.com/chrisby/torchMTL)
+
+![](https://pic3.zhimg.com/80/v2-f30787fffe79ad4212087bb49fccd368_1440w.png)
 
 ## Example 1 : MTL for linear regression
 
