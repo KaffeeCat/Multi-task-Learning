@@ -28,10 +28,8 @@ Finally, σ₁,σ₂ converges to the correct values
 
 [[Jupyter notebook]](https://github.com/KaffeeCat/Multi-task-Learning/blob/main/mtl_image_classification.ipynb)
 
-Dataset : MNIST
-Backbone : Conv2d → ReLU → Conv → ReLU → Maxpooling → Dropout → Flatten <br>
-Task head 1 : FC(9216, 256) → ReLU → Dropout → FC(256, 10) "It's easy to classification" <br>
-Task head 2 : FC(9216,  32) → ReLU → Dropout → FC(32,  10) "It's hard to classificatioh" <br>
+Dataset : MNIST <br>
+MTL Architecture : Shared backbone and split two separated head to do fully connected forward
 
 Training with Adam optimizer
 
